@@ -3,30 +3,36 @@ import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaClock } from "react-icons/fa";
 import { FaInstagram, FaLinkedin, FaYoutube, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import emailjs from "emailjs-com";
+import axios from "axios";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const Contact = () => {
-  const sendEmail = (e) => {
-    e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "YOUR_SERVICE_ID",      // 🔁 replace
-        "YOUR_TEMPLATE_ID",     // 🔁 replace
-        e.target,
-        "YOUR_PUBLIC_KEY"       // 🔁 replace
-      )
-      .then(
-        () => {
-          alert("Message sent successfully!");
-          e.target.reset();
-        },
-        () => {
-          alert("Failed to send message. Try again.");
-        }
-      );
+  const [loading, setLoading] = useState(false);
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      subject: e.target.subject.value,
+      message: e.target.message.value,
+    };
+
+    try {
+      await axios.post("http://localhost:5000/api/messages", formData);
+      alert("✅ Message sent successfully!");
+      e.target.reset();
+    } catch (error) {
+      alert("❌ Failed to send message. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <Container className="py-5 mt-5">
@@ -46,7 +52,7 @@ const Contact = () => {
           <Card className="p-4 shadow-sm h-100">
             <h4 className="fw-bold mb-3">Send Message</h4>
 
-            <Form onSubmit={sendEmail}>
+            <Form onSubmit={sendMessage}>
               <Form.Group className="mb-3">
                 <Form.Control type="text" name="name" placeholder="Full Name" required />
               </Form.Group>
@@ -64,12 +70,14 @@ const Contact = () => {
               </Form.Group>
 
               <Button
-                type="submit"
-                className="w-100"
-                style={{ backgroundColor: "#10B981", border: "none" }}
-              >
-                Send Message
-              </Button>
+  type="submit"
+  className="w-100"
+  disabled={loading}
+  style={{ backgroundColor: "#10B981", border: "none" }}
+>
+  {loading ? "Sending..." : "Send Message"}
+</Button>
+
             </Form>
           </Card>
         </Col>
