@@ -3,36 +3,45 @@ import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaClock } from "react-icons/fa";
 import { FaInstagram, FaLinkedin, FaYoutube, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import axios from "axios";
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 const Contact = () => {
-
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
+    const form = e.target;
+
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      subject: form.subject.value,
+      message: form.message.value,
     };
 
     try {
-      await axios.post("http://localhost:5000/api/messages", formData);
-      alert("✅ Message sent successfully!");
-      e.target.reset();
+      const res = await fetch("http://localhost:5000/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.message);
+
+      toast.success("✅ Message sent successfully!");
+      form.reset();
     } catch (error) {
-      alert("❌ Failed to send message. Try again.");
+      toast.error("❌ Failed to send message. Try again.");
     } finally {
       setLoading(false);
     }
   };
-
 
   return (
     <Container className="py-5 mt-5">
@@ -54,30 +63,50 @@ const Contact = () => {
 
             <Form onSubmit={sendMessage}>
               <Form.Group className="mb-3">
-                <Form.Control type="text" name="name" placeholder="Full Name" required />
+                <Form.Control
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Control type="email" name="email" placeholder="Email Address" required />
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Control type="text" name="subject" placeholder="Subject" required />
+                <Form.Control
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Control as="textarea" rows={4} name="message" placeholder="Message" required />
+                <Form.Control
+                  as="textarea"
+                  rows={4}
+                  name="message"
+                  placeholder="Message"
+                  required
+                />
               </Form.Group>
 
               <Button
-  type="submit"
-  className="w-100"
-  disabled={loading}
-  style={{ backgroundColor: "#10B981", border: "none" }}
->
-  {loading ? "Sending..." : "Send Message"}
-</Button>
-
+                type="submit"
+                className="w-100"
+                disabled={loading}
+                style={{ backgroundColor: "#10B981", border: "none" }}
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </Button>
             </Form>
           </Card>
         </Col>
@@ -90,32 +119,20 @@ const Contact = () => {
           >
             <h4 className="fw-bold mb-4">Contact Information</h4>
 
-            {/* WhatsApp */}
-            <p>
-              <a
-                href="https://wa.me/250789402303"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white text-decoration-none"
-              >
-                <FaWhatsapp className="me-2" /> Chat on WhatsApp
-              </a>
-            </p>
-
-            {/* Location */}
             <p>
               <FaMapMarkerAlt className="me-2" />
-              Kigali - Kicukiro Sonatube - Inindi House (Former UTB University)
+              Kigali - Kicukiro Sonatube - Inindi House
             </p>
 
-            {/* Call */}
             <p>
-              <a href="tel:+250789402303" className="text-white text-decoration-none">
+              <a
+                href="tel:+250789402303"
+                className="text-white text-decoration-none"
+              >
                 <FaPhoneAlt className="me-2" /> +250 789 402 303
               </a>
             </p>
 
-            {/* Email */}
             <p>
               <a
                 href="mailto:edtechsolutions72@gmail.com"
@@ -125,26 +142,24 @@ const Contact = () => {
               </a>
             </p>
 
-            {/* Office Hours */}
             <p>
               <FaClock className="me-2" /> Mon - Fri: 8AM - 5PM
             </p>
 
-            {/* Social Media */}
             <div className="mt-4">
               <h6 className="fw-bold">Follow Us</h6>
               <div className="d-flex gap-3 mt-2">
-                <a href="#" className="text-white"><FaInstagram size={22} /></a>
-                <a href="#" className="text-white"><FaLinkedin size={22} /></a>
-                <a href="#" className="text-white"><FaYoutube size={22} /></a>
-                <a href="#" className="text-white"><FaTiktok size={22} /></a>
-                <a href="#" className="text-white"><FaXTwitter size={22} /></a>
+                <FaInstagram size={22} />
+                <FaLinkedin size={22} />
+                <FaYoutube size={22} />
+                <FaTiktok size={22} />
+                <FaXTwitter size={22} />
               </div>
-              <p className="mt-2 fw-semibold">Ed Tech Training Center</p>
             </div>
           </Card>
         </Col>
       </Row>
+
 
       {/* MAP */}
       <div className="mt-5 shadow-sm rounded overflow-hidden">
@@ -177,8 +192,6 @@ const Contact = () => {
               </Button>
             </motion.div>
     </Container>
-
-    
   );
 };
 
