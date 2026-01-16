@@ -67,7 +67,7 @@ const About = () => {
                       <span style={{ fontSize: "1.3rem", color: "#1E3A8A" }}>{course.icon}</span>
                       <span style={{ fontWeight: "500" }}>{course.name}</span>
                     </div>
-                    <Button size="sm" style={{ backgroundColor: "#14B8A6", border: "none" }}>
+                    <Button size="sm" href="/Apply" style={{ backgroundColor: "#14B8A6", border: "none" }}>
                       Apply Now
                     </Button>
                   </ListGroup.Item>
@@ -85,7 +85,7 @@ const About = () => {
                       <span style={{ fontSize: "1.3rem", color: "#1E3A8A" }}>{service.icon}</span>
                       <span style={{ fontWeight: "500" }}>{service.name}</span>
                     </div>
-                    <Button size="sm" style={{ backgroundColor: "#14B8A6", border: "none" }}>
+                    <Button size="sm" href="/Apply" style={{ backgroundColor: "#14B8A6", border: "none" }}>
                       Apply Now
                     </Button>
                   </ListGroup.Item>
