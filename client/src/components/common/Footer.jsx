@@ -1,4 +1,5 @@
 import "./Footer.css";
+import { Link } from "react-router-dom";
 import {
   FaWhatsapp,
   FaInstagram,
@@ -105,7 +106,7 @@ const Footer = () => {
 
       {/* COPYRIGHT */}
       <div className="footer-bottom">
-        © 2026 Ed Tech Solutions. All Rights Reserved.
+        <Link to="/admin/login" className="text-decoration-none">©</Link> 2026 Ed Tech Solutions. All Rights Reserved.
       </div>
     </footer>
   );

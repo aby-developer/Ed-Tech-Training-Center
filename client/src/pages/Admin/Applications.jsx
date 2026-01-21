@@ -59,13 +59,13 @@ const Applications = () => {
       icon: <BsChatDots size={18} />,
       path: "/admin/messages",
       description: "View"
-    },
-    {
-      title: "Settings",
-      icon: <BsGear size={18} />,
-      path: "/admin/settings",
-      description: "System"
     }
+    // {
+    //   title: "Settings",
+    //   icon: <BsGear size={18} />,
+    //   path: "/admin/settings",
+    //   description: "System"
+    // }
   ];
 
   // Fetch applications from your API
@@ -448,9 +448,9 @@ const Applications = () => {
                   <BsPersonCircle size={20} color={primaryColor} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => navigate("/admin/profile")}>
+                  {/* <Dropdown.Item onClick={() => navigate("/admin/profile")}>
                     Profile
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
                   <Dropdown.Divider />
                   <Dropdown.Item className="text-danger" onClick={handleLogout}>
                     Logout

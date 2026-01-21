@@ -8,8 +8,8 @@ import {
   deleteApplication,
   deleteMessage,
   getAdminProfile,
-  updateAdminInfo,
-  changeAdminPassword
+  updateAdminInfo
+  // changeAdminPassword  // Temporarily comment this out
 } from "../controllers/adminDashboardController.js";
 
 import { protectAdmin } from "../middleware/authMiddleware.js";
@@ -32,5 +32,6 @@ router.delete("/messages/:id", protectAdmin, deleteMessage);
 // ADMIN PROFILE
 router.get("/profile", protectAdmin, getAdminProfile);
 router.patch("/profile", protectAdmin, updateAdminInfo);
-router.patch("/change-password", protectAdmin, changeAdminPassword);
+// router.patch("/change-password", protectAdmin, changeAdminPassword); // Temporarily comment out
+
 export default router;
