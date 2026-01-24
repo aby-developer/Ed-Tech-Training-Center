@@ -21,7 +21,7 @@ const programFees = {
 // POST – Save application
 router.post("/", async (req, res) => {
   try {
-    const { fullName, email, phone, program } = req.body;
+    const { fullName, email, phone, instagram, program } = req.body;
 
     if (!fullName || !email || !phone || !program) {
       return res.status(400).json({ message: "All fields are required" });
@@ -33,6 +33,7 @@ router.post("/", async (req, res) => {
       fullName,
       email,
       phone,
+      instagram,
       program,
       fee,
     });

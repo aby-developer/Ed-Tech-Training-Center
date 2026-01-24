@@ -63,14 +63,7 @@ const AppNavbar = () => {
               Apply Now
             </Button>
 
-            <Button
-  as={Link}
-  to="/admin/login"
-  variant={darkMode ? "outline-light" : "outline-primary"}
-  className="px-4 rounded-pill"
->
-  Login
-</Button>
+   
 
 
             {/* Dark Mode Toggle */}

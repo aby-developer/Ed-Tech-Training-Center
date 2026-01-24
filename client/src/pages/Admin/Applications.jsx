@@ -19,7 +19,8 @@ import {
   BsPeople,
   BsChatDots,
   BsGear,
-  BsPersonCircle
+  BsPersonCircle,
+  BsInstagram
 } from "react-icons/bs";
 import api from "../../services/api";
 
@@ -322,10 +323,22 @@ const Applications = () => {
                   <div className="mb-0">
                     <small className="text-muted d-block mb-1 d-flex align-items-center gap-1">
                       <BsPhone size={12} />
+
+          
                       Phone
                     </small>
                     <div className="fw-medium" style={{ fontSize: '0.9rem' }}>{application.phone || 'N/A'}</div>
                   </div>
+
+
+                  <div className="mb-0">
+                    <small className="text-muted d-block mb-1 d-flex align-items-center gap-1">
+                      <BsInstagram size={12} />
+                      Instagram
+                    </small>
+                    <div className="fw-medium" style={{ fontSize: '0.9rem' }}>{application.instagram || 'Not Available'}</div>
+                  </div>
+
                 </div>
               </div>
             </div>

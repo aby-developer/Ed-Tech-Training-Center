@@ -68,7 +68,7 @@ const AdminLogin = () => {
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
-                      placeholder="admin@example.com"
+                      placeholder="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required

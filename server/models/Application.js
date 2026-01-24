@@ -6,6 +6,7 @@ const applicationSchema = new mongoose.Schema(
     fullName: { type: String, required: true, trim: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },
+    instagram: { type: String, trim:true }, // New field for Instagram handle
     program: { type: String, required: true },
     fee: { type: Number, required: true },
     status: { 
